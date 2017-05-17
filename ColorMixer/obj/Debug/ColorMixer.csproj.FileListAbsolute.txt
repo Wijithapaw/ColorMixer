@@ -1,0 +1,18 @@
+D:\Sample Projects\ColorMixer\ColorMixer\bin\Debug\ColorMixer.exe.config
+D:\Sample Projects\ColorMixer\ColorMixer\bin\Debug\ColorMixer.exe
+D:\Sample Projects\ColorMixer\ColorMixer\bin\Debug\ColorMixer.pdb
+D:\Sample Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.csprojResolveAssemblyReference.cache
+D:\Sample Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.Form1.resources
+D:\Sample Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.Properties.Resources.resources
+D:\Sample Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.csproj.GenerateResource.Cache
+D:\Sample Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.exe
+D:\Sample Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.pdb
+D:\Projects\ColorMixer\ColorMixer\bin\Debug\ColorMixer.exe.config
+D:\Projects\ColorMixer\ColorMixer\bin\Debug\ColorMixer.exe
+D:\Projects\ColorMixer\ColorMixer\bin\Debug\ColorMixer.pdb
+D:\Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.mainForm.resources
+D:\Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.Properties.Resources.resources
+D:\Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.csproj.GenerateResource.Cache
+D:\Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.exe
+D:\Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.pdb
+D:\Projects\ColorMixer\ColorMixer\obj\Debug\ColorMixer.csprojResolveAssemblyReference.cache

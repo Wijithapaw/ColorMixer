@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,5 +24,27 @@ namespace ColorMixer
             byte b = (byte)((color.B * amount) + backColor.B * (1 - amount));
             return Color.FromArgb(r, g, b);
         }
+
+        public static List<BasicColor> GetColors()
+        {
+            using (StreamReader r = new StreamReader("colors.json"))
+            {
+                string json = r.ReadToEnd();
+                List<BasicColor> items = JsonConvert.DeserializeObject<List<BasicColor>>(json);
+                return items;
+            }
+        }
+        
+    }
+
+    public class BasicColor {
+
+        public string name { get; set; }
+
+        public int r { get; set; }
+
+        public int g { get; set; }
+
+        public int b { get; set; }
     }
 }

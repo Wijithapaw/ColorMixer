@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.myPanel = new System.Windows.Forms.TableLayoutPanel();
             this.btnReset = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblRows = new System.Windows.Forms.Label();
+            this.btnAddRow = new System.Windows.Forms.Button();
             this.btnDelRow = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblCols = new System.Windows.Forms.Label();
             this.btnAddCol = new System.Windows.Forms.Button();
             this.btnDelCol = new System.Windows.Forms.Button();
             this.pnlColor1 = new System.Windows.Forms.Panel();
             this.cbColor1 = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.rbCol = new System.Windows.Forms.RadioButton();
-            this.rbRow = new System.Windows.Forms.RadioButton();
             this.btnFinalize = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.btnAddRow = new System.Windows.Forms.Button();
-            this.lblRows = new System.Windows.Forms.Label();
-            this.lblCols = new System.Windows.Forms.Label();
             this.pnlColumns = new System.Windows.Forms.TableLayoutPanel();
             this.pnlRows = new System.Windows.Forms.TableLayoutPanel();
             this.lblCopyRight = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblDate = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // myPanel
@@ -74,7 +76,6 @@
             this.myPanel.Size = new System.Drawing.Size(815, 285);
             this.myPanel.TabIndex = 0;
             this.myPanel.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.myPanel_CellPaint);
-            this.myPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.myPanel_MouseClick);
             // 
             // btnReset
             // 
@@ -100,6 +101,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rows";
             // 
+            // lblRows
+            // 
+            this.lblRows.AutoSize = true;
+            this.lblRows.Location = new System.Drawing.Point(52, 22);
+            this.lblRows.Name = "lblRows";
+            this.lblRows.Size = new System.Drawing.Size(16, 17);
+            this.lblRows.TabIndex = 10;
+            this.lblRows.Text = "1";
+            // 
+            // btnAddRow
+            // 
+            this.btnAddRow.Location = new System.Drawing.Point(91, 21);
+            this.btnAddRow.Name = "btnAddRow";
+            this.btnAddRow.Size = new System.Drawing.Size(27, 23);
+            this.btnAddRow.TabIndex = 9;
+            this.btnAddRow.Text = "+";
+            this.btnAddRow.UseVisualStyleBackColor = true;
+            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
+            // 
             // btnDelRow
             // 
             this.btnDelRow.Location = new System.Drawing.Point(9, 21);
@@ -121,6 +141,15 @@
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Columns";
+            // 
+            // lblCols
+            // 
+            this.lblCols.AutoSize = true;
+            this.lblCols.Location = new System.Drawing.Point(51, 24);
+            this.lblCols.Name = "lblCols";
+            this.lblCols.Size = new System.Drawing.Size(16, 17);
+            this.lblCols.TabIndex = 11;
+            this.lblCols.Text = "1";
             // 
             // btnAddCol
             // 
@@ -147,7 +176,7 @@
             this.pnlColor1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlColor1.BackColor = System.Drawing.Color.Transparent;
             this.pnlColor1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlColor1.Location = new System.Drawing.Point(984, 312);
+            this.pnlColor1.Location = new System.Drawing.Point(984, 209);
             this.pnlColor1.Name = "pnlColor1";
             this.pnlColor1.Size = new System.Drawing.Size(80, 69);
             this.pnlColor1.TabIndex = 8;
@@ -169,44 +198,11 @@
             "Black",
             "White",
             "silver"});
-            this.cbColor1.Location = new System.Drawing.Point(984, 261);
+            this.cbColor1.Location = new System.Drawing.Point(984, 158);
             this.cbColor1.Name = "cbColor1";
             this.cbColor1.Size = new System.Drawing.Size(80, 24);
             this.cbColor1.TabIndex = 9;
             this.cbColor1.SelectionChangeCommitted += new System.EventHandler(this.cbColor1_SelectedIndexChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.rbCol);
-            this.panel1.Controls.Add(this.rbRow);
-            this.panel1.Location = new System.Drawing.Point(984, 160);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(80, 72);
-            this.panel1.TabIndex = 11;
-            // 
-            // rbCol
-            // 
-            this.rbCol.AutoSize = true;
-            this.rbCol.Location = new System.Drawing.Point(7, 42);
-            this.rbCol.Name = "rbCol";
-            this.rbCol.Size = new System.Drawing.Size(56, 21);
-            this.rbCol.TabIndex = 12;
-            this.rbCol.TabStop = true;
-            this.rbCol.Text = "Cols";
-            this.rbCol.UseVisualStyleBackColor = true;
-            // 
-            // rbRow
-            // 
-            this.rbRow.AutoSize = true;
-            this.rbRow.Checked = true;
-            this.rbRow.Location = new System.Drawing.Point(7, 15);
-            this.rbRow.Name = "rbRow";
-            this.rbRow.Size = new System.Drawing.Size(63, 21);
-            this.rbRow.TabIndex = 11;
-            this.rbRow.TabStop = true;
-            this.rbRow.Text = "Rows";
-            this.rbRow.UseVisualStyleBackColor = true;
             // 
             // btnFinalize
             // 
@@ -230,34 +226,6 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // btnAddRow
-            // 
-            this.btnAddRow.Location = new System.Drawing.Point(91, 21);
-            this.btnAddRow.Name = "btnAddRow";
-            this.btnAddRow.Size = new System.Drawing.Size(27, 23);
-            this.btnAddRow.TabIndex = 9;
-            this.btnAddRow.Text = "+";
-            this.btnAddRow.UseVisualStyleBackColor = true;
-            this.btnAddRow.Click += new System.EventHandler(this.btnAddRow_Click);
-            // 
-            // lblRows
-            // 
-            this.lblRows.AutoSize = true;
-            this.lblRows.Location = new System.Drawing.Point(52, 22);
-            this.lblRows.Name = "lblRows";
-            this.lblRows.Size = new System.Drawing.Size(16, 17);
-            this.lblRows.TabIndex = 10;
-            this.lblRows.Text = "1";
-            // 
-            // lblCols
-            // 
-            this.lblCols.AutoSize = true;
-            this.lblCols.Location = new System.Drawing.Point(51, 24);
-            this.lblCols.Name = "lblCols";
-            this.lblCols.Size = new System.Drawing.Size(16, 17);
-            this.lblCols.TabIndex = 11;
-            this.lblCols.Text = "1";
-            // 
             // pnlColumns
             // 
             this.pnlColumns.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -272,6 +240,7 @@
             this.pnlColumns.Size = new System.Drawing.Size(815, 40);
             this.pnlColumns.TabIndex = 14;
             this.pnlColumns.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.pnlColumns_CellPaint);
+            this.pnlColumns.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlColumns_MouseClick);
             // 
             // pnlRows
             // 
@@ -287,6 +256,7 @@
             this.pnlRows.Size = new System.Drawing.Size(40, 285);
             this.pnlRows.TabIndex = 15;
             this.pnlRows.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.pnlRows_CellPaint);
+            this.pnlRows.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlRows_MouseClick);
             // 
             // lblCopyRight
             // 
@@ -301,23 +271,71 @@
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(138, 466);
+            this.textBox1.Location = new System.Drawing.Point(194, 466);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(553, 22);
+            this.textBox1.Size = new System.Drawing.Size(432, 22);
             this.textBox1.TabIndex = 17;
+            // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Document = this.printDocument;
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.Visible = false;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Location = new System.Drawing.Point(690, 54);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 28);
+            this.btnPrint.TabIndex = 18;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(139, 470);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 17);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Name:";
+            // 
+            // lblDate
+            // 
+            this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(657, 469);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(38, 17);
+            this.lblDate.TabIndex = 20;
+            this.lblDate.Text = "Date";
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 578);
+            this.Controls.Add(this.lblDate);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblCopyRight);
             this.Controls.Add(this.pnlRows);
             this.Controls.Add(this.pnlColumns);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnFinalize);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.cbColor1);
             this.Controls.Add(this.pnlColor1);
             this.Controls.Add(this.groupBox2);
@@ -326,13 +344,11 @@
             this.Controls.Add(this.myPanel);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "mainForm";
-            this.Text = "Saree Designer";
+            this.Text = "Handloom Designer";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,9 +366,6 @@
         private System.Windows.Forms.Button btnDelCol;
         private System.Windows.Forms.Panel pnlColor1;
         private System.Windows.Forms.ComboBox cbColor1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton rbCol;
-        private System.Windows.Forms.RadioButton rbRow;
         private System.Windows.Forms.Button btnFinalize;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAddRow;
@@ -362,6 +375,11 @@
         private System.Windows.Forms.TableLayoutPanel pnlRows;
         private System.Windows.Forms.Label lblCopyRight;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblDate;
     }
 }
 

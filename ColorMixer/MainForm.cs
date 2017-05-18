@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +16,20 @@ namespace ColorMixer
         Dictionary<int, Color> rowColors = new Dictionary<int, Color>();
         Dictionary<int, Color> colColors = new Dictionary<int, Color>();
 
+        List<BasicColor> MyColors;
+
         public mainForm()
         {
             InitializeComponent();
             lblCopyRight.Text = Convert.ToChar(169) + " " + DateTime.Today.Year + " Wijitha Wijenayake All Rights Reserved";
+            MyColors = Utility.GetColors();
+                        
+            cbColor1.ValueMember = null;
+            cbColor1.DisplayMember = "name";
+            cbColor1.DataSource = MyColors;
+
+            lblDate.Text = "Designed On: " + DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
+            //printDocument.DefaultPageSettings.Landscape = true;
         }
 
         private void SelectColor(Color color)
@@ -46,7 +57,6 @@ namespace ColorMixer
             myPanel.ColumnCount = 1;
             myPanel.BackColor = Color.Transparent;
             cbColor1.SelectedIndex = 0;
-            rbRow.Checked = true;
             myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             pnlColor1.BackColor = Color.Transparent;
 
@@ -127,42 +137,37 @@ namespace ColorMixer
                 colColor = colColors[e.Column];
 
             Color blendedColor = GetBlendedColor(rowColor, colColor);
-
             e.Graphics.FillRectangle(new SolidBrush(blendedColor), e.CellBounds);
         }        
 
-        private void myPanel_MouseClick(object sender, MouseEventArgs e)
+        private void pnlColumns_MouseClick(object sender, MouseEventArgs e)
         {
             Point? clickedCell = GetRowColIndex(myPanel, e.Location);
 
             if (clickedCell != null)
             {
-                if (rbRow.Checked)
-                {
-                    if (rowColors.ContainsKey(clickedCell.Value.X))
-                    {
-                        rowColors[clickedCell.Value.X] = pnlColor1.BackColor;
-                    }
-                    else
-                    {
-                        rowColors.Add(clickedCell.Value.X, pnlColor1.BackColor);
-                    }
+                if (colColors.ContainsKey(clickedCell.Value.Y))                
+                    colColors[clickedCell.Value.Y] = pnlColor1.BackColor;
+                else
+                    colColors.Add(clickedCell.Value.Y, pnlColor1.BackColor);
+                
+                pnlColumns.Refresh();
+                myPanel.Refresh();
+            }
+        }
 
-                    pnlRows.Refresh();
-                }
-                else if (rbCol.Checked)
-                {
-                    if (colColors.ContainsKey(clickedCell.Value.Y))
-                    {
-                        colColors[clickedCell.Value.Y] = pnlColor1.BackColor;
-                    }
-                    else
-                    {
-                        colColors.Add(clickedCell.Value.Y, pnlColor1.BackColor);
-                    }
-                    pnlColumns.Refresh();
-                }
+        private void pnlRows_MouseClick(object sender, MouseEventArgs e)
+        {
+            Point? clickedCell = GetRowColIndex(pnlRows, e.Location);
 
+            if (clickedCell != null)
+            {
+                if (rowColors.ContainsKey(clickedCell.Value.X))                
+                    rowColors[clickedCell.Value.X] = pnlColor1.BackColor;                
+                else                
+                    rowColors.Add(clickedCell.Value.X, pnlColor1.BackColor);
+
+                pnlRows.Refresh();
                 myPanel.Refresh();
             }
         }
@@ -204,30 +209,20 @@ namespace ColorMixer
 
         private void cbColor1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pnlColor1.BackColor = GetColor(cbColor1.SelectedItem.ToString());
-        }
-
-        private Color GetColor(string color)
-        {
-            switch (color.ToLower())
+            if (cbColor1.SelectedValue != null)
             {
-                case "red": return Color.Red;
-                case "green": return Color.Green;
-                case "yellow": return Color.Yellow;
-                case "black": return Color.Black;
-                case "white": return Color.White;
-                case "blue": return Color.Blue;
-                case "royalblue": return Color.FromArgb(65, 105, 225);
-                case "skyblue": return Color.FromArgb(135, 206, 250);
-                case "gold": return Color.FromArgb(255, 215, 0);
-                case "lightred": return Color.FromArgb(255, 69, 0);
-                case "silver": return Color.FromArgb(192, 192, 192);
-            }
-            return Color.Transparent;
+                BasicColor rgb = (BasicColor)cbColor1.SelectedValue;
+                Color color = Color.Transparent;
+                if (rgb.name != "none")
+                    color = Color.FromArgb(rgb.r, rgb.g, rgb.b);
+
+                pnlColor1.BackColor = color;
+            }           
         }
 
         private void btnFinalize_Click(object sender, EventArgs e)
         {
+            lblDate.Text = "Designed On: " + DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
             myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
         }
 
@@ -255,5 +250,44 @@ namespace ColorMixer
 
             e.Graphics.FillRectangle(new SolidBrush(rowColor), e.CellBounds);
         }
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(bitmap, 0, 0);
+        }
+
+        Bitmap bitmap;
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
+            Rectangle bounds = this.Bounds;
+            //using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+            //{
+            //    using (Graphics g = Graphics.FromImage(bitmap))
+            //    {
+            //        g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+            //    }
+            //    bitmap.Save("C://test.jpg", ImageFormat.Jpeg);
+            //}
+
+
+            /*
+            //printDocument.DefaultPageSettings.Landscape = true;
+            Graphics g = this.CreateGraphics();
+            bmp = new Bitmap(this.Size.Width, this.Size.Height, g);
+            Graphics mg = Graphics.FromImage(bmp);
+            mg.CopyFromScreen(this.Location.X+ 20, this.Location.Y + 20, 0, 0, this.Size);
+            printPreviewDialog.ShowDialog();
+            */
+
+            bitmap = new Bitmap(bounds.Width, bounds.Height);
+            Graphics g = Graphics.FromImage(bitmap);
+            g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+
+            printDocument.Print();
+        }
+
+     
     }
 }

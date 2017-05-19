@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -34,7 +35,24 @@ namespace ColorMixer
                 return items;
             }
         }
-        
+
+        public static string GetSetting(string key, string defaultValue = "")
+        {
+            string value = ConfigurationManager.AppSettings.Get(key);
+
+            if (string.IsNullOrEmpty(value))
+                value = defaultValue;
+
+            return value;
+        }
+
+        public static string ConstructFileName(string name, DateTime dt)
+        {
+            if (string.IsNullOrEmpty(name))
+                name = "Design";
+
+            return string.Format("{0}_{1}.jpeg", name, dt.ToString("yyyyMMddHHmm")).Replace(" ", "_");
+        }        
     }
 
     public class BasicColor {

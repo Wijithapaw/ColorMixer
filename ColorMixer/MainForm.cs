@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,22 @@ namespace ColorMixer
 {
     public partial class mainForm : Form
     {
+        #region Variables
+
         Dictionary<int, Color> rowColors = new Dictionary<int, Color>();
         Dictionary<int, Color> colColors = new Dictionary<int, Color>();
 
         List<BasicColor> MyColors;
+
+        int StandardWidth;
+        int StandardHeight;
+        string CompanyNameStr = string.Empty;
+
+        DateTime dtDesigneTime = DateTime.Now;
+
+        #endregion
+        
+        #region Contructor
 
         public mainForm()
         {
@@ -28,27 +41,19 @@ namespace ColorMixer
             cbColor1.DisplayMember = "name";
             cbColor1.DataSource = MyColors;
 
-            lblDate.Text = "Designed On: " + DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
-            //printDocument.DefaultPageSettings.Landscape = true;
+            lblDate.Text = "Designed On: " + dtDesigneTime.ToString("dd/MM/yyyy hh:mm tt");
+
+            StandardHeight = int.Parse(Utility.GetSetting("StandardHeight", "44"));
+            StandardWidth = int.Parse(Utility.GetSetting("StandardWidth", "240"));
+            CompanyNameStr = Utility.GetSetting("CompanyName");
+
+            lblDesignBy.Text = "Designed By: " + CompanyNameStr; 
         }
 
-        private void SelectColor(Color color)
-        {
-            this.pnlColor1.BackColor = color;
-        }
+        #endregion
 
-        private void AddColor(Color newColor)
-        {
-            Color existingColor = myPanel.BackColor;
+        #region Click Events
 
-            double ratio = 0.5;
-
-            if (existingColor.Name.ToLower() == "transparent")
-                ratio = 1;
-
-            this.myPanel.BackColor = Utility.Blend(newColor, existingColor, ratio);
-        }
-               
         private void btnReset_Click(object sender, EventArgs e)
         {
             rowColors.Clear();
@@ -125,6 +130,27 @@ namespace ColorMixer
             lblRows.Text = myPanel.RowCount.ToString();
         }
 
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            SaveDesign();
+        }
+
+        private void btnFinalize_Click(object sender, EventArgs e)
+        {
+            dtDesigneTime = DateTime.Now;
+            lblDate.Text = "Designed On: " + dtDesigneTime.ToString("dd/MM/yyyy hh:mm tt");
+            myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+        }
+
+        #endregion
+
+        #region Panel Events
+
         private void myPanel_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
         {
             Color rowColor = Color.Transparent;
@@ -172,6 +198,97 @@ namespace ColorMixer
             }
         }
 
+        private void pnlColumns_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
+        {
+            Color colColor = Color.Transparent;
+
+            if (colColors.ContainsKey(e.Column))
+                colColor = colColors[e.Column];
+
+            e.Graphics.FillRectangle(new SolidBrush(colColor), e.CellBounds);
+        }
+
+        private void pnlRows_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
+        {
+            Color rowColor = Color.Transparent;
+
+            if (rowColors.ContainsKey(e.Row))
+                rowColor = rowColors[e.Row];
+
+            e.Graphics.FillRectangle(new SolidBrush(rowColor), e.CellBounds);
+        }
+
+        #endregion
+
+        #region Form Events
+
+        private void cbColor1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbColor1.SelectedValue != null)
+            {
+                BasicColor rgb = (BasicColor)cbColor1.SelectedValue;
+                Color color = Color.Transparent;
+                if (rgb.name != "none")
+                    color = Color.FromArgb(rgb.r, rgb.g, rgb.b);
+
+                pnlColor1.BackColor = color;
+            }           
+        }
+
+        private void mainForm_Resize(object sender, EventArgs e)
+        {
+            pnlRows.Height = myPanel.Height = (myPanel.Width * StandardHeight) / StandardWidth;
+            pnlPrint.Height = myPanel.Height + 180;      
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void SaveDesign()
+        {
+            Bitmap memoryImage;
+
+            int canvesWidth = pnlPrint.Width;
+            int canvesHeight = pnlPrint.Height;
+
+            Rectangle screenRectangle = RectangleToScreen(this.ClientRectangle);
+            int titleBarHeight = screenRectangle.Top - this.Top;
+            int borderWidth = screenRectangle.Left - this.Left;
+
+            int locationX = this.Location.X + pnlPrint.Location.X + borderWidth;
+            int locationY = this.Location.Y + pnlPrint.Location.Y + titleBarHeight;
+
+            memoryImage = new Bitmap(canvesWidth, canvesHeight);
+            Size s = new Size(memoryImage.Width, memoryImage.Height);
+
+            Graphics memoryGraphics = Graphics.FromImage(memoryImage);
+            memoryGraphics.CopyFromScreen(locationX, locationY, 0, 0, s);
+
+            using (MemoryStream memory = new MemoryStream())
+            {
+                memoryImage.Save(memory, ImageFormat.Jpeg);
+
+                Stream myStream;
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+                saveFileDialog1.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+                saveFileDialog1.FilterIndex = 1;
+                saveFileDialog1.RestoreDirectory = true;
+                saveFileDialog1.FileName = Utility.ConstructFileName(txtName.Text, dtDesigneTime);
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    if ((myStream = saveFileDialog1.OpenFile()) != null)
+                    {
+                        byte[] bytes = memory.ToArray();
+                        myStream.Write(bytes, 0, bytes.Length);
+                        myStream.Close();
+                    }
+                }
+            }
+        }
+
         private Color GetBlendedColor(Color color1, Color color2)
         {
             double ratio = 0.5;
@@ -184,7 +301,7 @@ namespace ColorMixer
             return Utility.Blend(color2, color1, ratio);
         }
 
-        Point? GetRowColIndex(TableLayoutPanel tlp, Point point)
+        private Point? GetRowColIndex(TableLayoutPanel tlp, Point point)
         {
             if (point.X > tlp.Width || point.Y > tlp.Height)
                 return null;
@@ -207,87 +324,6 @@ namespace ColorMixer
             return new Point(row, col);
         }
 
-        private void cbColor1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbColor1.SelectedValue != null)
-            {
-                BasicColor rgb = (BasicColor)cbColor1.SelectedValue;
-                Color color = Color.Transparent;
-                if (rgb.name != "none")
-                    color = Color.FromArgb(rgb.r, rgb.g, rgb.b);
-
-                pnlColor1.BackColor = color;
-            }           
-        }
-
-        private void btnFinalize_Click(object sender, EventArgs e)
-        {
-            lblDate.Text = "Designed On: " + DateTime.Now.ToString("dd/MM/yyyy hh:mm tt");
-            myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-        }
-
-        private void pnlColumns_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
-        {
-            Color colColor = Color.Transparent;
-
-            if (colColors.ContainsKey(e.Column))
-                colColor = colColors[e.Column];
-
-            e.Graphics.FillRectangle(new SolidBrush(colColor), e.CellBounds);
-        }
-
-        private void pnlRows_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
-        {
-            Color rowColor = Color.Transparent;
-
-            if (rowColors.ContainsKey(e.Row))
-                rowColor = rowColors[e.Row];
-
-            e.Graphics.FillRectangle(new SolidBrush(rowColor), e.CellBounds);
-        }
-
-        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            e.Graphics.DrawImage(bitmap, 0, 0);
-        }
-
-        Bitmap bitmap;
-
-        private void btnPrint_Click(object sender, EventArgs e)
-        {
-
-            Rectangle bounds = this.Bounds;
-            //using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
-            //{
-            //    using (Graphics g = Graphics.FromImage(bitmap))
-            //    {
-            //        g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
-            //    }
-            //    bitmap.Save("C://test.jpg", ImageFormat.Jpeg);
-            //}
-
-
-            /*
-            //printDocument.DefaultPageSettings.Landscape = true;
-            Graphics g = this.CreateGraphics();
-            bmp = new Bitmap(this.Size.Width, this.Size.Height, g);
-            Graphics mg = Graphics.FromImage(bmp);
-            mg.CopyFromScreen(this.Location.X+ 20, this.Location.Y + 20, 0, 0, this.Size);
-            printPreviewDialog.ShowDialog();
-            */
-
-            bitmap = new Bitmap(bounds.Width, bounds.Height);
-            Graphics g = Graphics.FromImage(bitmap);
-            g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
-
-            printDocument.Print();
-        }
-
-     
+        #endregion
     }
 }

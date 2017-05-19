@@ -52,6 +52,8 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.pnlPrint = new System.Windows.Forms.Panel();
             this.lblDesignBy = new System.Windows.Forms.Label();
+            this.pnlAllRows = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlAllCols = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlPrint.SuspendLayout();
@@ -351,11 +353,47 @@
             this.lblDesignBy.TabIndex = 21;
             this.lblDesignBy.Text = "Designed By:";
             // 
+            // pnlAllRows
+            // 
+            this.pnlAllRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAllRows.BackColor = System.Drawing.Color.Transparent;
+            this.pnlAllRows.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.pnlAllRows.ColumnCount = 1;
+            this.pnlAllRows.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlAllRows.Location = new System.Drawing.Point(770, 299);
+            this.pnlAllRows.Name = "pnlAllRows";
+            this.pnlAllRows.RowCount = 3;
+            this.pnlAllRows.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.pnlAllRows.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.pnlAllRows.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34F));
+            this.pnlAllRows.Size = new System.Drawing.Size(29, 58);
+            this.pnlAllRows.TabIndex = 22;
+            this.pnlAllRows.Click += new System.EventHandler(this.pnlAllRows_Click);
+            // 
+            // pnlAllCols
+            // 
+            this.pnlAllCols.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAllCols.BackColor = System.Drawing.Color.Transparent;
+            this.pnlAllCols.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.pnlAllCols.ColumnCount = 3;
+            this.pnlAllCols.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.pnlAllCols.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            this.pnlAllCols.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
+            this.pnlAllCols.Location = new System.Drawing.Point(770, 254);
+            this.pnlAllCols.Name = "pnlAllCols";
+            this.pnlAllCols.RowCount = 1;
+            this.pnlAllCols.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.pnlAllCols.Size = new System.Drawing.Size(60, 24);
+            this.pnlAllCols.TabIndex = 23;
+            this.pnlAllCols.Click += new System.EventHandler(this.pnlAllCols_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(871, 476);
+            this.Controls.Add(this.pnlAllCols);
+            this.Controls.Add(this.pnlAllRows);
             this.Controls.Add(this.pnlPrint);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.lblCopyRight);
@@ -406,6 +444,8 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Panel pnlPrint;
         private System.Windows.Forms.Label lblDesignBy;
+        private System.Windows.Forms.TableLayoutPanel pnlAllRows;
+        private System.Windows.Forms.TableLayoutPanel pnlAllCols;
     }
 }
 

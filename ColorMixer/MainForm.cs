@@ -41,13 +41,13 @@ namespace ColorMixer
             cbColor1.DisplayMember = "name";
             cbColor1.DataSource = MyColors;
 
-            lblDate.Text = "Designed On: " + dtDesigneTime.ToString("dd/MM/yyyy hh:mm tt");
-
             StandardHeight = int.Parse(Utility.GetSetting("StandardHeight", "44"));
             StandardWidth = int.Parse(Utility.GetSetting("StandardWidth", "240"));
             CompanyNameStr = Utility.GetSetting("CompanyName");
 
-            lblDesignBy.Text = "Designed By: " + CompanyNameStr; 
+            lblDesignBy.Text = "Designed By: " + CompanyNameStr;
+
+            Reset();
         }
 
         #endregion
@@ -56,20 +56,7 @@ namespace ColorMixer
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            rowColors.Clear();
-            colColors.Clear();
-            myPanel.RowCount = 1;
-            myPanel.ColumnCount = 1;
-            myPanel.BackColor = Color.Transparent;
-            cbColor1.SelectedIndex = 0;
-            myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
-            pnlColor1.BackColor = Color.Transparent;
-
-            lblRows.Text = myPanel.RowCount.ToString();
-            lblCols.Text = myPanel.ColumnCount.ToString();
-
-            pnlRows.RowCount = 1;
-            pnlColumns.ColumnCount = 1;    
+            Reset();
         }
 
         private void btnDelCol_Click(object sender, EventArgs e)
@@ -77,6 +64,8 @@ namespace ColorMixer
             if (myPanel.ColumnCount > 1)
             {
                 ColumnStyle colStyle = myPanel.ColumnStyles[myPanel.ColumnCount - 1];
+
+                colColors.Remove(colColors.Count - 1);
 
                 myPanel.ColumnCount--;
                 pnlColumns.ColumnCount--;
@@ -91,6 +80,8 @@ namespace ColorMixer
         private void btnAddCol_Click(object sender, EventArgs e)
         {
             ColumnStyle colStyle = myPanel.ColumnStyles[myPanel.ColumnCount - 1];
+
+            colColors.Add(colColors.Count, pnlAllCols.BackColor);            
 
             myPanel.ColumnCount++;
             pnlColumns.ColumnCount++;
@@ -107,6 +98,8 @@ namespace ColorMixer
             {
                 RowStyle rowStyle = myPanel.RowStyles[myPanel.RowCount - 1];
 
+                rowColors.Remove(rowColors.Count - 1);
+
                 myPanel.RowCount--;
                 pnlRows.RowCount--;
 
@@ -120,6 +113,8 @@ namespace ColorMixer
         private void btnAddRow_Click(object sender, EventArgs e)
         {
             RowStyle rowStyle = myPanel.RowStyles[myPanel.RowCount - 1];
+
+            rowColors.Add(rowColors.Count, pnlAllRows.BackColor);
 
             myPanel.RowCount++;
             pnlRows.RowCount++;
@@ -172,11 +167,8 @@ namespace ColorMixer
 
             if (clickedCell != null)
             {
-                if (colColors.ContainsKey(clickedCell.Value.Y))                
-                    colColors[clickedCell.Value.Y] = pnlColor1.BackColor;
-                else
-                    colColors.Add(clickedCell.Value.Y, pnlColor1.BackColor);
-                
+                colColors[clickedCell.Value.Y] = pnlColor1.BackColor;
+
                 pnlColumns.Refresh();
                 myPanel.Refresh();
             }
@@ -188,10 +180,7 @@ namespace ColorMixer
 
             if (clickedCell != null)
             {
-                if (rowColors.ContainsKey(clickedCell.Value.X))                
-                    rowColors[clickedCell.Value.X] = pnlColor1.BackColor;                
-                else                
-                    rowColors.Add(clickedCell.Value.X, pnlColor1.BackColor);
+                rowColors[clickedCell.Value.X] = pnlColor1.BackColor;
 
                 pnlRows.Refresh();
                 myPanel.Refresh();
@@ -239,6 +228,28 @@ namespace ColorMixer
         {
             pnlRows.Height = myPanel.Height = (myPanel.Width * StandardHeight) / StandardWidth;
             pnlPrint.Height = myPanel.Height + 180;      
+        }
+
+        private void pnlAllCols_Click(object sender, EventArgs e)
+        {
+            pnlAllCols.BackColor = pnlColor1.BackColor;
+
+            for (int i = 0; i < colColors.Count; i++)
+                colColors[i] = pnlColor1.BackColor;
+
+            pnlColumns.Refresh();
+            myPanel.Refresh();
+        }
+
+        private void pnlAllRows_Click(object sender, EventArgs e)
+        {
+            pnlAllRows.BackColor = pnlColor1.BackColor;
+
+            for (int i = 0; i < rowColors.Count; i++)
+                rowColors[i] = pnlColor1.BackColor;
+
+            pnlRows.Refresh();
+            myPanel.Refresh();
         }
 
         #endregion
@@ -324,6 +335,34 @@ namespace ColorMixer
             return new Point(row, col);
         }
 
+        private void Reset()
+        {
+            rowColors.Clear();
+            colColors.Clear();
+            myPanel.RowCount = 1;
+            myPanel.ColumnCount = 1;
+
+            rowColors.Add(0, Color.Transparent);
+            colColors.Add(0, Color.Transparent);
+
+            myPanel.BackColor = Color.Transparent;
+            cbColor1.SelectedIndex = 0;
+            myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            pnlColor1.BackColor = Color.Transparent;
+
+            lblRows.Text = myPanel.RowCount.ToString();
+            lblCols.Text = myPanel.ColumnCount.ToString();
+
+            pnlRows.RowCount = 1;
+            pnlColumns.ColumnCount = 1;
+
+            pnlAllCols.BackColor = Color.Transparent;
+            pnlAllRows.BackColor = Color.Transparent;
+
+            lblDate.Text = "Designed On: " + dtDesigneTime.ToString("dd/MM/yyyy hh:mm tt");
+        }
+
         #endregion
+       
     }
 }

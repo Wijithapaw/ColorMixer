@@ -51,7 +51,7 @@ namespace ColorMixer
             if (string.IsNullOrEmpty(name))
                 name = "Design";
 
-            return string.Format("{0}_{1}.jpeg", name, dt.ToString("yyyyMMddHHmm")).Replace(" ", "_");
+            return string.Format("{0}_{1}.jpeg", name, dt.ToString("yyyyMMddHHmmss")).Replace(" ", "_");
         }        
     }
 

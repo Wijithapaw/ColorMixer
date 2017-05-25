@@ -74,7 +74,7 @@ namespace ColorMixer
                 pnlColumns.ColumnStyles.RemoveAt(pnlColumns.ColumnCount - 1);
             }
 
-            lblCols.Text = myPanel.ColumnCount.ToString();
+            SetCellSizes();
         }
 
         private void btnAddCol_Click(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace ColorMixer
             myPanel.ColumnStyles.Add(new ColumnStyle(colStyle.SizeType, colStyle.Width));
             pnlColumns.ColumnStyles.Add(new ColumnStyle(colStyle.SizeType, colStyle.Width));
 
-            lblCols.Text = myPanel.ColumnCount.ToString();
+            SetCellSizes();
         }
 
         private void btnDelRow_Click(object sender, EventArgs e)
@@ -107,7 +107,7 @@ namespace ColorMixer
                 pnlRows.RowStyles.RemoveAt(myPanel.RowCount - 1);
             }
 
-            lblRows.Text = myPanel.RowCount.ToString();
+            SetCellSizes();
         }
 
         private void btnAddRow_Click(object sender, EventArgs e)
@@ -121,8 +121,8 @@ namespace ColorMixer
 
             myPanel.RowStyles.Add(new RowStyle(rowStyle.SizeType, rowStyle.Height));
             pnlRows.RowStyles.Add(new RowStyle(rowStyle.SizeType, rowStyle.Height));
-
-            lblRows.Text = myPanel.RowCount.ToString();
+            
+            SetCellSizes();
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -140,6 +140,12 @@ namespace ColorMixer
         private void btnEdit_Click(object sender, EventArgs e)
         {
             myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            SettingsForm settings = new SettingsForm();
+            settings.ShowDialog();
         }
 
         #endregion
@@ -360,9 +366,21 @@ namespace ColorMixer
             pnlAllRows.BackColor = Color.Transparent;
 
             lblDate.Text = "Designed On: " + dtDesigneTime.ToString("dd/MM/yyyy hh:mm tt");
+
+            lblSize.Text = string.Format("Size: {0} x {1} inches", StandardWidth, StandardHeight);
+            SetCellSizes();
+        }
+
+        private void SetCellSizes()
+        {
+            lblRows.Text = myPanel.RowCount.ToString();
+            lblCols.Text = myPanel.ColumnCount.ToString();
+
+            lblRowCell.Text = string.Format("Row Cell: {0} inches", Math.Round((double)StandardHeight/ (double)rowColors.Count, 2));
+            lblColumnCell.Text = string.Format("Column Cell: {0} inches", Math.Round((double)StandardWidth / (double)colColors.Count, 2));
         }
 
         #endregion
-       
+        
     }
 }

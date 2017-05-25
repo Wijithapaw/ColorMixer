@@ -51,12 +51,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.pnlPrint = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblColumnCell = new System.Windows.Forms.Label();
+            this.lblSize = new System.Windows.Forms.Label();
+            this.lblRowCell = new System.Windows.Forms.Label();
             this.lblDesignBy = new System.Windows.Forms.Label();
             this.pnlAllRows = new System.Windows.Forms.TableLayoutPanel();
             this.pnlAllCols = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlPrint.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // myPanel
@@ -318,7 +324,7 @@
             // 
             this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(427, 215);
+            this.lblDate.Location = new System.Drawing.Point(302, 254);
             this.lblDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(30, 13);
@@ -329,6 +335,7 @@
             // 
             this.pnlPrint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPrint.Controls.Add(this.panel1);
             this.pnlPrint.Controls.Add(this.lblDesignBy);
             this.pnlPrint.Controls.Add(this.myPanel);
             this.pnlPrint.Controls.Add(this.lblDate);
@@ -341,6 +348,45 @@
             this.pnlPrint.Name = "pnlPrint";
             this.pnlPrint.Size = new System.Drawing.Size(690, 295);
             this.pnlPrint.TabIndex = 21;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lblColumnCell);
+            this.panel1.Controls.Add(this.lblSize);
+            this.panel1.Controls.Add(this.lblRowCell);
+            this.panel1.Location = new System.Drawing.Point(513, 197);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(164, 85);
+            this.panel1.TabIndex = 22;
+            // 
+            // lblColumnCell
+            // 
+            this.lblColumnCell.Location = new System.Drawing.Point(3, 54);
+            this.lblColumnCell.Name = "lblColumnCell";
+            this.lblColumnCell.Size = new System.Drawing.Size(161, 23);
+            this.lblColumnCell.TabIndex = 24;
+            this.lblColumnCell.Text = "Column Size";
+            this.lblColumnCell.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblSize
+            // 
+            this.lblSize.Location = new System.Drawing.Point(10, 8);
+            this.lblSize.Name = "lblSize";
+            this.lblSize.Size = new System.Drawing.Size(154, 23);
+            this.lblSize.TabIndex = 22;
+            this.lblSize.Text = "Saree Size";
+            this.lblSize.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblRowCell
+            // 
+            this.lblRowCell.Location = new System.Drawing.Point(6, 31);
+            this.lblRowCell.Name = "lblRowCell";
+            this.lblRowCell.Size = new System.Drawing.Size(158, 23);
+            this.lblRowCell.TabIndex = 23;
+            this.lblRowCell.Text = "Row Size";
+            this.lblRowCell.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblDesignBy
             // 
@@ -387,11 +433,23 @@
             this.pnlAllCols.TabIndex = 23;
             this.pnlAllCols.Click += new System.EventHandler(this.pnlAllCols_Click);
             // 
+            // btnSettings
+            // 
+            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettings.Location = new System.Drawing.Point(770, 441);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(61, 23);
+            this.btnSettings.TabIndex = 24;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(871, 476);
+            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.pnlAllCols);
             this.Controls.Add(this.pnlAllRows);
             this.Controls.Add(this.pnlPrint);
@@ -413,6 +471,7 @@
             this.groupBox2.PerformLayout();
             this.pnlPrint.ResumeLayout(false);
             this.pnlPrint.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -446,6 +505,11 @@
         private System.Windows.Forms.Label lblDesignBy;
         private System.Windows.Forms.TableLayoutPanel pnlAllRows;
         private System.Windows.Forms.TableLayoutPanel pnlAllCols;
+        private System.Windows.Forms.Label lblColumnCell;
+        private System.Windows.Forms.Label lblRowCell;
+        private System.Windows.Forms.Label lblSize;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 

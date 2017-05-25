@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorMixer", "ColorMixer\ColorMixer.csproj", "{BC9D3BCC-DF4A-47EC-A781-5767DE8D101C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorMixer.Security", "ColorMixer.Security\ColorMixer.Security.csproj", "{2C317639-D4B8-49FB-B036-98E43EBF9E62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorMixer.KeyGen", "ColorMixer.KeyGen\ColorMixer.KeyGen.csproj", "{D80B8B97-8893-420F-9EA7-B4E481560D84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{BC9D3BCC-DF4A-47EC-A781-5767DE8D101C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC9D3BCC-DF4A-47EC-A781-5767DE8D101C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC9D3BCC-DF4A-47EC-A781-5767DE8D101C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C317639-D4B8-49FB-B036-98E43EBF9E62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C317639-D4B8-49FB-B036-98E43EBF9E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C317639-D4B8-49FB-B036-98E43EBF9E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C317639-D4B8-49FB-B036-98E43EBF9E62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D80B8B97-8893-420F-9EA7-B4E481560D84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D80B8B97-8893-420F-9EA7-B4E481560D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D80B8B97-8893-420F-9EA7-B4E481560D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D80B8B97-8893-420F-9EA7-B4E481560D84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,16 +17,17 @@ namespace ColorMixer.KeyGen
         public formKeyGen()
         {
             InitializeComponent();
+            dtExpiryDate.Value = DateTime.Today.AddYears(10);
         }
 
         private void formKeyGen_Load(object sender, EventArgs e)
         {
-            txtUniqueIDd.Text = licenseManager.GetMachineUniqueId().ToString();
+            //txtUniqueIDd.Text = licenseManager.GetMachineUniqueId().ToString();
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            txtLicenseKey.Text = licenseManager.GenerateKey(licenseManager.GetMachineUniqueId(), dtExpiryDate.Value);                
+            txtLicenseKey.Text = licenseManager.GenerateKey(licenseManager.GetMachineUniqueId(), dtExpiryDate.Value);
         }
     }
 }

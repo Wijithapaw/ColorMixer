@@ -59,6 +59,7 @@
             this.pnlAllRows = new System.Windows.Forms.TableLayoutPanel();
             this.pnlAllCols = new System.Windows.Forms.TableLayoutPanel();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.lblTrial = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlPrint.SuspendLayout();
@@ -79,16 +80,16 @@
             this.myPanel.RowCount = 1;
             this.myPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.myPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.myPanel.Size = new System.Drawing.Size(619, 123);
+            this.myPanel.Size = new System.Drawing.Size(829, 123);
             this.myPanel.TabIndex = 0;
             this.myPanel.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.myPanel_CellPaint);
             // 
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Location = new System.Drawing.Point(770, 44);
+            this.btnReset.Location = new System.Drawing.Point(965, 44);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(60, 23);
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 5;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -191,7 +192,7 @@
             this.pnlColor1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlColor1.BackColor = System.Drawing.Color.Transparent;
             this.pnlColor1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlColor1.Location = new System.Drawing.Point(770, 176);
+            this.pnlColor1.Location = new System.Drawing.Point(980, 176);
             this.pnlColor1.Margin = new System.Windows.Forms.Padding(2);
             this.pnlColor1.Name = "pnlColor1";
             this.pnlColor1.Size = new System.Drawing.Size(61, 57);
@@ -214,7 +215,7 @@
             "Black",
             "White",
             "silver"});
-            this.cbColor1.Location = new System.Drawing.Point(770, 135);
+            this.cbColor1.Location = new System.Drawing.Point(980, 135);
             this.cbColor1.Margin = new System.Windows.Forms.Padding(2);
             this.cbColor1.Name = "cbColor1";
             this.cbColor1.Size = new System.Drawing.Size(61, 21);
@@ -224,24 +225,24 @@
             // btnFinalize
             // 
             this.btnFinalize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFinalize.Location = new System.Drawing.Point(696, 44);
+            this.btnFinalize.Location = new System.Drawing.Point(880, 44);
             this.btnFinalize.Margin = new System.Windows.Forms.Padding(2);
             this.btnFinalize.Name = "btnFinalize";
-            this.btnFinalize.Size = new System.Drawing.Size(56, 23);
+            this.btnFinalize.Size = new System.Drawing.Size(75, 23);
             this.btnFinalize.TabIndex = 12;
-            this.btnFinalize.Text = "Finalize";
+            this.btnFinalize.Text = "Hide Lines";
             this.btnFinalize.UseVisualStyleBackColor = true;
             this.btnFinalize.Click += new System.EventHandler(this.btnFinalize_Click);
             // 
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Location = new System.Drawing.Point(622, 44);
+            this.btnEdit.Location = new System.Drawing.Point(795, 44);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(56, 23);
+            this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 13;
-            this.btnEdit.Text = "Edit";
+            this.btnEdit.Text = "Show Lines";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -257,7 +258,7 @@
             this.pnlColumns.Name = "pnlColumns";
             this.pnlColumns.RowCount = 1;
             this.pnlColumns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.pnlColumns.Size = new System.Drawing.Size(619, 32);
+            this.pnlColumns.Size = new System.Drawing.Size(829, 32);
             this.pnlColumns.TabIndex = 14;
             this.pnlColumns.CellPaint += new System.Windows.Forms.TableLayoutCellPaintEventHandler(this.pnlColumns_CellPaint);
             this.pnlColumns.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlColumns_MouseClick);
@@ -281,7 +282,7 @@
             // 
             this.lblCopyRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCopyRight.AutoSize = true;
-            this.lblCopyRight.Location = new System.Drawing.Point(10, 453);
+            this.lblCopyRight.Location = new System.Drawing.Point(10, 580);
             this.lblCopyRight.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCopyRight.Name = "lblCopyRight";
             this.lblCopyRight.Size = new System.Drawing.Size(50, 13);
@@ -291,7 +292,7 @@
             // txtName
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtName.Location = new System.Drawing.Point(98, 213);
+            this.txtName.Location = new System.Drawing.Point(98, 211);
             this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(312, 20);
@@ -300,10 +301,10 @@
             // btnPrint
             // 
             this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Location = new System.Drawing.Point(552, 44);
+            this.btnPrint.Location = new System.Drawing.Point(710, 44);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(56, 23);
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 18;
             this.btnPrint.Text = "Save";
             this.btnPrint.UseVisualStyleBackColor = true;
@@ -313,7 +314,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(56, 216);
+            this.label1.Location = new System.Drawing.Point(56, 214);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
@@ -324,7 +325,7 @@
             // 
             this.lblDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(302, 254);
+            this.lblDate.Location = new System.Drawing.Point(57, 267);
             this.lblDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(30, 13);
@@ -346,7 +347,7 @@
             this.pnlPrint.Location = new System.Drawing.Point(62, 113);
             this.pnlPrint.Margin = new System.Windows.Forms.Padding(2);
             this.pnlPrint.Name = "pnlPrint";
-            this.pnlPrint.Size = new System.Drawing.Size(690, 295);
+            this.pnlPrint.Size = new System.Drawing.Size(900, 295);
             this.pnlPrint.TabIndex = 21;
             // 
             // panel1
@@ -356,7 +357,7 @@
             this.panel1.Controls.Add(this.lblColumnCell);
             this.panel1.Controls.Add(this.lblSize);
             this.panel1.Controls.Add(this.lblRowCell);
-            this.panel1.Location = new System.Drawing.Point(513, 197);
+            this.panel1.Location = new System.Drawing.Point(723, 197);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(164, 85);
             this.panel1.TabIndex = 22;
@@ -392,7 +393,7 @@
             // 
             this.lblDesignBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDesignBy.AutoSize = true;
-            this.lblDesignBy.Location = new System.Drawing.Point(56, 254);
+            this.lblDesignBy.Location = new System.Drawing.Point(56, 242);
             this.lblDesignBy.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDesignBy.Name = "lblDesignBy";
             this.lblDesignBy.Size = new System.Drawing.Size(70, 13);
@@ -406,7 +407,7 @@
             this.pnlAllRows.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.pnlAllRows.ColumnCount = 1;
             this.pnlAllRows.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlAllRows.Location = new System.Drawing.Point(770, 299);
+            this.pnlAllRows.Location = new System.Drawing.Point(980, 299);
             this.pnlAllRows.Name = "pnlAllRows";
             this.pnlAllRows.RowCount = 3;
             this.pnlAllRows.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33F));
@@ -425,7 +426,7 @@
             this.pnlAllCols.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
             this.pnlAllCols.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
             this.pnlAllCols.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
-            this.pnlAllCols.Location = new System.Drawing.Point(770, 254);
+            this.pnlAllCols.Location = new System.Drawing.Point(980, 254);
             this.pnlAllCols.Name = "pnlAllCols";
             this.pnlAllCols.RowCount = 1;
             this.pnlAllCols.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -436,7 +437,7 @@
             // btnSettings
             // 
             this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSettings.Location = new System.Drawing.Point(770, 441);
+            this.btnSettings.Location = new System.Drawing.Point(980, 568);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(61, 23);
             this.btnSettings.TabIndex = 24;
@@ -444,11 +445,25 @@
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
+            // lblTrial
+            // 
+            this.lblTrial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTrial.AutoSize = true;
+            this.lblTrial.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTrial.ForeColor = System.Drawing.Color.Red;
+            this.lblTrial.Location = new System.Drawing.Point(945, 9);
+            this.lblTrial.Name = "lblTrial";
+            this.lblTrial.Size = new System.Drawing.Size(96, 20);
+            this.lblTrial.TabIndex = 25;
+            this.lblTrial.Text = "Trial Version";
+            this.lblTrial.Visible = false;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(871, 476);
+            this.ClientSize = new System.Drawing.Size(1081, 603);
+            this.Controls.Add(this.lblTrial);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.pnlAllCols);
             this.Controls.Add(this.pnlAllRows);
@@ -510,6 +525,7 @@
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Label lblTrial;
     }
 }
 

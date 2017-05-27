@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ColorMixer.Security;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ColorMixer.Security.LicenseManager;
 
 namespace ColorMixer
 {
@@ -36,7 +38,28 @@ namespace ColorMixer
             }
         }
 
-        public static string GetSetting(string key, string defaultValue = "")
+        public static List<BasicColor> GetTrialColors()
+        {
+            List<BasicColor> items = new List<BasicColor>();
+            items.Add(new BasicColor { name = "None", r = 0, g = 0, b = 0 });
+            items.Add(new BasicColor { name = "Red", r = 255, g = 0, b = 0 });
+            items.Add(new BasicColor { name = "Green", r = 0, g = 128, b = 0 });
+            items.Add(new BasicColor { name = "Black", r = 0, g = 0, b = 0 });
+            items.Add(new BasicColor { name = "Yellow", r = 255, g = 255, b = 0 });
+            return items;
+        }
+
+        public static void UpdateColors(List<BasicColor> listColors)
+        {
+            string jsonData = JsonConvert.SerializeObject(listColors);
+
+            using (StreamWriter r = new StreamWriter("colors.json"))
+            {
+                r.Write(jsonData);
+            }
+        }
+
+        public static string GetAppSetting(string key, string defaultValue = "")
         {
             string value = ConfigurationManager.AppSettings.Get(key);
 
@@ -46,13 +69,35 @@ namespace ColorMixer
             return value;
         }
 
+        public static void SaveAppSetting(string key, string value)
+        {
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            if (settings[key] == null)
+            {
+                settings.Add(key, value);
+            }
+            else
+            {
+                settings[key].Value = value;
+            }
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+        }
+
         public static string ConstructFileName(string name, DateTime dt)
         {
             if (string.IsNullOrEmpty(name))
                 name = "Design";
 
             return string.Format("{0}_{1}.jpeg", name, dt.ToString("yyyyMMddHHmmss")).Replace(" ", "_");
-        }        
+        }
+
+        public static LicenseStatus GetLicenseStatus()
+        {
+            LicenseManager licenseNamager = new LicenseManager();
+            return licenseNamager.GetKeyStatus(Utility.GetAppSetting("LicenseKey"));
+        }     
     }
 
     public class BasicColor {

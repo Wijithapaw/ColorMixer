@@ -1,72 +1,72 @@
 ﻿[
   {
-    "name": "none",
+    "name": "None",
     "r": 0,
     "g": 0,
     "b": 0
   },
   {
-    "name": "red",
+    "name": "Red",
     "r": 255,
     "g": 0,
     "b": 0
   },
   {
-    "name": "lightred",
+    "name": "Light Red",
     "r": 255,
     "g": 69,
     "b": 0
   },
   {
-    "name": "green",
+    "name": "Green",
     "r": 0,
     "g": 128,
     "b": 0
   },
   {
-    "name": "blue",
+    "name": "Blue",
     "r": 0,
     "g": 0,
     "b": 255
   },
   {
-    "name": "skyblue",
+    "name": "Sky Blue",
     "r": 135,
     "g": 206,
     "b": 250
   },
   {
-    "name": "royalblue",
+    "name": "Royal Blue",
     "r": 65,
     "g": 105,
     "b": 225
   },
   {
-    "name": "yellow",
+    "name": "Yellow",
     "r": 255,
     "g": 255,
     "b": 0
   },
   {
-    "name": "gold",
+    "name": "Gold",
     "r": 255,
     "g": 215,
     "b": 0
   },
   {
-    "name": "black",
+    "name": "Black",
     "r": 0,
     "g": 0,
     "b": 0
   },
   {
-    "name": "white",
+    "name": "White",
     "r": 255,
     "g": 255,
     "b": 255
   },
   {
-    "name": "silver",
+    "name": "Silver",
     "r": 192,
     "g": 192,
     "b": 192

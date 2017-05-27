@@ -83,7 +83,7 @@
             // 
             // txtLicenseKey
             // 
-            this.txtLicenseKey.Location = new System.Drawing.Point(94, 156);
+            this.txtLicenseKey.Location = new System.Drawing.Point(94, 173);
             this.txtLicenseKey.Name = "txtLicenseKey";
             this.txtLicenseKey.ReadOnly = true;
             this.txtLicenseKey.Size = new System.Drawing.Size(218, 20);
@@ -92,7 +92,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 159);
+            this.label2.Location = new System.Drawing.Point(24, 176);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 5;

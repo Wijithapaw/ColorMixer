@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ColorMixer.Security.LicenseManager;
 
 namespace ColorMixer
 {
@@ -24,6 +25,8 @@ namespace ColorMixer
         int StandardWidth;
         int StandardHeight;
         string CompanyNameStr = string.Empty;
+        string CompanyTel = string.Empty;
+        string CompanyAddress = string.Empty;
 
         DateTime dtDesigneTime = DateTime.Now;
 
@@ -34,20 +37,10 @@ namespace ColorMixer
         public mainForm()
         {
             InitializeComponent();
-            lblCopyRight.Text = Convert.ToChar(169) + " " + DateTime.Today.Year + " Wijitha Wijenayake All Rights Reserved";
-            MyColors = Utility.GetColors();
-                        
-            cbColor1.ValueMember = null;
-            cbColor1.DisplayMember = "name";
-            cbColor1.DataSource = MyColors;
-
-            StandardHeight = int.Parse(Utility.GetSetting("StandardHeight", "44"));
-            StandardWidth = int.Parse(Utility.GetSetting("StandardWidth", "240"));
-            CompanyNameStr = Utility.GetSetting("CompanyName");
-
-            lblDesignBy.Text = "Designed By: " + CompanyNameStr;
-
+            SetCompanySettings();
             Reset();
+
+            lblCopyRight.Text = Convert.ToChar(169) + " " + DateTime.Today.Year + " Elegance (pvt) Ltd All Rights Reserved";
         }
 
         #endregion
@@ -144,8 +137,14 @@ namespace ColorMixer
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            SettingsForm settings = new SettingsForm();
+            settingsForm settings = new settingsForm();
+            settings.FormClosed += Settings_FormClosed;
             settings.ShowDialog();
+        }
+
+        private void Settings_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SetCompanySettings();
         }
 
         #endregion
@@ -223,7 +222,7 @@ namespace ColorMixer
             {
                 BasicColor rgb = (BasicColor)cbColor1.SelectedValue;
                 Color color = Color.Transparent;
-                if (rgb.name != "none")
+                if (rgb.name.ToLower() != "none")
                     color = Color.FromArgb(rgb.r, rgb.g, rgb.b);
 
                 pnlColor1.BackColor = color;
@@ -369,6 +368,34 @@ namespace ColorMixer
 
             lblSize.Text = string.Format("Size: {0} x {1} inches", StandardWidth, StandardHeight);
             SetCellSizes();
+        }
+
+        private void SetCompanySettings()
+        {
+            if (Utility.GetLicenseStatus() == LicenseStatus.Valid)
+            {
+                MyColors = Utility.GetColors();
+                btnPrint.Enabled = true;
+                lblTrial.Visible = false;
+            }
+            else
+            {
+                MyColors = Utility.GetTrialColors();
+                btnPrint.Enabled = false;
+                lblTrial.Visible = true;
+            }
+
+            cbColor1.ValueMember = null;
+            cbColor1.DisplayMember = "name";
+            cbColor1.DataSource = MyColors;
+
+            StandardHeight = int.Parse(Utility.GetAppSetting("StandardHeight", "44"));
+            StandardWidth = int.Parse(Utility.GetAppSetting("StandardWidth", "240"));
+            CompanyNameStr = Utility.GetAppSetting("CompanyName");
+            CompanyTel = Utility.GetAppSetting("Telephone");
+            CompanyAddress = Utility.GetAppSetting("Address");
+
+            lblDesignBy.Text = string.Format("Designed By: {0} | {1} | Tel: {2}", CompanyNameStr, CompanyAddress, CompanyTel);
         }
 
         private void SetCellSizes()

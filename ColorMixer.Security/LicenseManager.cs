@@ -9,12 +9,19 @@ namespace ColorMixer.Security
 {
     public class LicenseManager
     {
-        const string PassPhrase = "m@zda";
+        public enum LicenseStatus
+        {
+            Valid,
+            Expired,
+            Invalid,
+            Corrupted,
+            NotAvailable,
+            Unknown
+        }
 
-        readonly char[] numaricChars = { 'H', 'J', 'K', 'M', 'N', 'P', 'R', 'S', 'T', 'Z' };
+        const string numaricChars = "HJKMNPRSTZ";
 
-        readonly char[] seperationChars = { 'v', 'W', 'X', 'Y', 'U' };
-
+        const string seperationChars = "VWXYUL"; 
 
         public LicenseManager()
         {
@@ -46,18 +53,62 @@ namespace ColorMixer.Security
             return hashedUniqueId;
         }
 
-
         public string GenerateKey(int machineUniqueId, DateTime expiryDate)
         {
-            string expiryDateStr = expiryDate.ToString("yyyy-MM-dd");
+            string rawKey = GetRawKey(machineUniqueId, expiryDate);
+
+            string encryptedKey = Encrypt(rawKey);
+
+            return encryptedKey;
+        }
+
+        public LicenseStatus GetKeyStatus(string key)
+        {
+            LicenseStatus keyStatus = LicenseStatus.Valid;
+
+
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                keyStatus = LicenseStatus.NotAvailable;
+            }
+            else
+            {
+                try
+                {
+                    string rawKey = Decrypt(key);
+
+                    string[] keyData = rawKey.Split('|');
+
+                    string keyMachineUniqueId = keyData[0];
+
+                    string machineUniqueId = GetMachineUniqueId().ToString("X");
+
+                    DateTime expiryDate = new DateTime(int.Parse(keyData[1]), int.Parse(keyData[2]), int.Parse(keyData[3]));
+
+                    if (keyMachineUniqueId != machineUniqueId)
+                        keyStatus = LicenseStatus.Invalid;
+                    else if (expiryDate < DateTime.Today)
+                        keyStatus = LicenseStatus.Expired;
+                    else
+                        keyStatus = LicenseStatus.Valid;
+                }
+                catch
+                {
+                    keyStatus = LicenseStatus.Corrupted;
+                }
+            }
+            return keyStatus;
+        }
+
+        public string GetRawKey(int machineUniqueId, DateTime expiryDate)
+        {
+            string expiryDateStr = expiryDate.ToString("yyyy|MM|dd");
 
             string hexMachineId = machineUniqueId.ToString("X");
 
             string rawKey = hexMachineId + "|" + expiryDateStr;
 
-            string encryptedKey = Encrypt(rawKey); // StringCipher.Encrypt(rawKey, PassPhrase);
-
-            return encryptedKey;
+            return rawKey;
         }
 
         private string Encrypt(string key)
@@ -66,18 +117,90 @@ namespace ColorMixer.Security
 
             StringBuilder encryptedKey = new StringBuilder();
 
+            int num;
+
             foreach (char c in key)
             {
-                if (c == '|' || c == '-')
+                if (int.TryParse(c.ToString(), out num))
                 {
-                    encryptedKey.Append(seperationChars[rand.Next(0, 4)]);
+                    encryptedKey.Append(numaricChars[num]);
+                }
+                else if (c == '|')
+                {
+                    encryptedKey.Append(seperationChars[rand.Next(0, 5)]);
                 }
                 else
                 {
-                    encryptedKey.Append(numaricChars[int.Parse( c.ToString()]);
+                    encryptedKey.Append(c);
                 }
             }
-            return encryptedKey.ToString();
+
+            encryptedKey.Append(GetCheckSum(encryptedKey.ToString()));
+
+            InsertSeperationChars(encryptedKey);
+
+            string finalKey = encryptedKey.ToString();
+
+            return finalKey;
+        }
+
+        public string Decrypt(string key)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+                throw new ApplicationException("Key is empty");
+
+            key = key.ToUpper();
+
+            key = key.Replace("-", "");
+
+            Char checkSum = key.Last();
+
+            key = key.Remove(key.Length - 1);
+
+            if (checkSum != GetCheckSum(key))
+                throw new ApplicationException("Key is corrupted");
+
+            StringBuilder decryptedKey = new StringBuilder();
+
+            foreach (char c in key)
+            {
+                if (numaricChars.Contains(c))
+                {
+                    decryptedKey.Append(numaricChars.IndexOf(c));
+                }
+                else if (seperationChars.Contains(c))
+                {
+                    decryptedKey.Append('|');
+                }
+                else
+                {
+                    decryptedKey.Append(c);
+                }
+            }
+
+            return decryptedKey.ToString();
+        }
+
+        private char GetCheckSum(string key)
+        {
+            int charSum = 0;
+
+            foreach (char c in key)
+            {
+                charSum += (int)c;
+            }
+
+            char keyChar = numaricChars[(charSum / key.Length) % 10];
+
+            return keyChar;
+        }
+
+        private void InsertSeperationChars(StringBuilder key)
+        {
+            key.Insert(16, "-");
+            key.Insert(12, "-");
+            key.Insert(8, "-");
+            key.Insert(4, "-");
         }
 
     }

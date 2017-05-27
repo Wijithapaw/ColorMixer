@@ -458,7 +458,6 @@
             this.txtColCount.Size = new System.Drawing.Size(45, 20);
             this.txtColCount.TabIndex = 27;
             this.txtColCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtColCount.TextChanged += new System.EventHandler(this.txtColCount_TextChanged);
             this.txtColCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRowCount_KeyPress);
             // 
             // btnSetRows

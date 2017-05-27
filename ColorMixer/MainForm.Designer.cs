@@ -32,11 +32,9 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblRows = new System.Windows.Forms.Label();
             this.btnAddRow = new System.Windows.Forms.Button();
             this.btnDelRow = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblCols = new System.Windows.Forms.Label();
             this.btnAddCol = new System.Windows.Forms.Button();
             this.btnDelCol = new System.Windows.Forms.Button();
             this.pnlColor1 = new System.Windows.Forms.Panel();
@@ -60,6 +58,10 @@
             this.pnlAllCols = new System.Windows.Forms.TableLayoutPanel();
             this.btnSettings = new System.Windows.Forms.Button();
             this.lblTrial = new System.Windows.Forms.Label();
+            this.txtRowCount = new System.Windows.Forms.TextBox();
+            this.txtColCount = new System.Windows.Forms.TextBox();
+            this.btnSetRows = new System.Windows.Forms.Button();
+            this.btnColCount = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlPrint.SuspendLayout();
@@ -97,34 +99,25 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblRows);
+            this.groupBox1.Controls.Add(this.btnSetRows);
+            this.groupBox1.Controls.Add(this.txtRowCount);
             this.groupBox1.Controls.Add(this.btnAddRow);
             this.groupBox1.Controls.Add(this.btnDelRow);
             this.groupBox1.Location = new System.Drawing.Point(80, 29);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(100, 45);
+            this.groupBox1.Size = new System.Drawing.Size(178, 45);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rows";
             // 
-            // lblRows
-            // 
-            this.lblRows.AutoSize = true;
-            this.lblRows.Location = new System.Drawing.Point(39, 18);
-            this.lblRows.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblRows.Name = "lblRows";
-            this.lblRows.Size = new System.Drawing.Size(13, 13);
-            this.lblRows.TabIndex = 10;
-            this.lblRows.Text = "1";
-            // 
             // btnAddRow
             // 
-            this.btnAddRow.Location = new System.Drawing.Point(68, 17);
+            this.btnAddRow.Location = new System.Drawing.Point(146, 17);
             this.btnAddRow.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddRow.Name = "btnAddRow";
-            this.btnAddRow.Size = new System.Drawing.Size(20, 19);
+            this.btnAddRow.Size = new System.Drawing.Size(20, 20);
             this.btnAddRow.TabIndex = 9;
             this.btnAddRow.Text = "+";
             this.btnAddRow.UseVisualStyleBackColor = true;
@@ -132,10 +125,10 @@
             // 
             // btnDelRow
             // 
-            this.btnDelRow.Location = new System.Drawing.Point(7, 17);
+            this.btnDelRow.Location = new System.Drawing.Point(121, 17);
             this.btnDelRow.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelRow.Name = "btnDelRow";
-            this.btnDelRow.Size = new System.Drawing.Size(20, 19);
+            this.btnDelRow.Size = new System.Drawing.Size(20, 20);
             this.btnDelRow.TabIndex = 8;
             this.btnDelRow.Text = "-";
             this.btnDelRow.UseVisualStyleBackColor = true;
@@ -143,34 +136,25 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.lblCols);
+            this.groupBox2.Controls.Add(this.btnColCount);
+            this.groupBox2.Controls.Add(this.txtColCount);
             this.groupBox2.Controls.Add(this.btnAddCol);
             this.groupBox2.Controls.Add(this.btnDelCol);
-            this.groupBox2.Location = new System.Drawing.Point(202, 29);
+            this.groupBox2.Location = new System.Drawing.Point(307, 29);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(93, 45);
+            this.groupBox2.Size = new System.Drawing.Size(178, 45);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Columns";
             // 
-            // lblCols
-            // 
-            this.lblCols.AutoSize = true;
-            this.lblCols.Location = new System.Drawing.Point(38, 20);
-            this.lblCols.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblCols.Name = "lblCols";
-            this.lblCols.Size = new System.Drawing.Size(13, 13);
-            this.lblCols.TabIndex = 11;
-            this.lblCols.Text = "1";
-            // 
             // btnAddCol
             // 
-            this.btnAddCol.Location = new System.Drawing.Point(64, 17);
+            this.btnAddCol.Location = new System.Drawing.Point(146, 17);
             this.btnAddCol.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddCol.Name = "btnAddCol";
-            this.btnAddCol.Size = new System.Drawing.Size(20, 19);
+            this.btnAddCol.Size = new System.Drawing.Size(20, 20);
             this.btnAddCol.TabIndex = 11;
             this.btnAddCol.Text = "+";
             this.btnAddCol.UseVisualStyleBackColor = true;
@@ -178,10 +162,10 @@
             // 
             // btnDelCol
             // 
-            this.btnDelCol.Location = new System.Drawing.Point(7, 17);
+            this.btnDelCol.Location = new System.Drawing.Point(118, 17);
             this.btnDelCol.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelCol.Name = "btnDelCol";
-            this.btnDelCol.Size = new System.Drawing.Size(20, 19);
+            this.btnDelCol.Size = new System.Drawing.Size(20, 20);
             this.btnDelCol.TabIndex = 10;
             this.btnDelCol.Text = "-";
             this.btnDelCol.UseVisualStyleBackColor = true;
@@ -458,6 +442,47 @@
             this.lblTrial.Text = "Trial Version";
             this.lblTrial.Visible = false;
             // 
+            // txtRowCount
+            // 
+            this.txtRowCount.Location = new System.Drawing.Point(11, 17);
+            this.txtRowCount.Name = "txtRowCount";
+            this.txtRowCount.Size = new System.Drawing.Size(45, 20);
+            this.txtRowCount.TabIndex = 26;
+            this.txtRowCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRowCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRowCount_KeyPress);
+            // 
+            // txtColCount
+            // 
+            this.txtColCount.Location = new System.Drawing.Point(13, 17);
+            this.txtColCount.Name = "txtColCount";
+            this.txtColCount.Size = new System.Drawing.Size(45, 20);
+            this.txtColCount.TabIndex = 27;
+            this.txtColCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtColCount.TextChanged += new System.EventHandler(this.txtColCount_TextChanged);
+            this.txtColCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRowCount_KeyPress);
+            // 
+            // btnSetRows
+            // 
+            this.btnSetRows.Location = new System.Drawing.Point(61, 17);
+            this.btnSetRows.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSetRows.Name = "btnSetRows";
+            this.btnSetRows.Size = new System.Drawing.Size(48, 20);
+            this.btnSetRows.TabIndex = 27;
+            this.btnSetRows.Text = "Set";
+            this.btnSetRows.UseVisualStyleBackColor = true;
+            this.btnSetRows.Click += new System.EventHandler(this.btnSetRows_Click);
+            // 
+            // btnColCount
+            // 
+            this.btnColCount.Location = new System.Drawing.Point(63, 17);
+            this.btnColCount.Margin = new System.Windows.Forms.Padding(2);
+            this.btnColCount.Name = "btnColCount";
+            this.btnColCount.Size = new System.Drawing.Size(48, 20);
+            this.btnColCount.TabIndex = 28;
+            this.btnColCount.Text = "Set";
+            this.btnColCount.UseVisualStyleBackColor = true;
+            this.btnColCount.Click += new System.EventHandler(this.btnColCount_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -507,8 +532,6 @@
         private System.Windows.Forms.Button btnFinalize;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAddRow;
-        private System.Windows.Forms.Label lblRows;
-        private System.Windows.Forms.Label lblCols;
         private System.Windows.Forms.TableLayoutPanel pnlColumns;
         private System.Windows.Forms.TableLayoutPanel pnlRows;
         private System.Windows.Forms.Label lblCopyRight;
@@ -526,6 +549,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Label lblTrial;
+        private System.Windows.Forms.TextBox txtRowCount;
+        private System.Windows.Forms.TextBox txtColCount;
+        private System.Windows.Forms.Button btnSetRows;
+        private System.Windows.Forms.Button btnColCount;
     }
 }
 

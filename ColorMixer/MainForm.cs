@@ -54,68 +54,29 @@ namespace ColorMixer
 
         private void btnDelCol_Click(object sender, EventArgs e)
         {
-            if (myPanel.ColumnCount > 1)
-            {
-                ColumnStyle colStyle = myPanel.ColumnStyles[myPanel.ColumnCount - 1];
-
-                colColors.Remove(colColors.Count - 1);
-
-                myPanel.ColumnCount--;
-                pnlColumns.ColumnCount--;
-
-                myPanel.ColumnStyles.RemoveAt(myPanel.ColumnCount - 1);
-                pnlColumns.ColumnStyles.RemoveAt(pnlColumns.ColumnCount - 1);
-            }
-
+            DeleteColoum();
             SetCellSizes();
+            txtColCount.Text = colColors.Count.ToString();
         }
 
         private void btnAddCol_Click(object sender, EventArgs e)
         {
-            ColumnStyle colStyle = myPanel.ColumnStyles[myPanel.ColumnCount - 1];
-
-            colColors.Add(colColors.Count, pnlAllCols.BackColor);            
-
-            myPanel.ColumnCount++;
-            pnlColumns.ColumnCount++;
-
-            myPanel.ColumnStyles.Add(new ColumnStyle(colStyle.SizeType, colStyle.Width));
-            pnlColumns.ColumnStyles.Add(new ColumnStyle(colStyle.SizeType, colStyle.Width));
-
-            SetCellSizes();
+            AddColumn();
+            txtColCount.Text = colColors.Count.ToString();
         }
 
         private void btnDelRow_Click(object sender, EventArgs e)
         {
-            if (myPanel.RowCount > 1)
-            {
-                RowStyle rowStyle = myPanel.RowStyles[myPanel.RowCount - 1];
-
-                rowColors.Remove(rowColors.Count - 1);
-
-                myPanel.RowCount--;
-                pnlRows.RowCount--;
-
-                myPanel.RowStyles.RemoveAt(myPanel.RowCount - 1);
-                pnlRows.RowStyles.RemoveAt(myPanel.RowCount - 1);
-            }
-
+            DeleteRow();
             SetCellSizes();
+            txtRowCount.Text = rowColors.Count.ToString();
         }
 
         private void btnAddRow_Click(object sender, EventArgs e)
         {
-            RowStyle rowStyle = myPanel.RowStyles[myPanel.RowCount - 1];
-
-            rowColors.Add(rowColors.Count, pnlAllRows.BackColor);
-
-            myPanel.RowCount++;
-            pnlRows.RowCount++;
-
-            myPanel.RowStyles.Add(new RowStyle(rowStyle.SizeType, rowStyle.Height));
-            pnlRows.RowStyles.Add(new RowStyle(rowStyle.SizeType, rowStyle.Height));
-            
+            AddRow();
             SetCellSizes();
+            txtRowCount.Text = rowColors.Count.ToString();
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -256,6 +217,67 @@ namespace ColorMixer
             pnlRows.Refresh();
             myPanel.Refresh();
         }
+        
+        private void txtRowCount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void btnSetRows_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtRowCount.Text) || int.Parse(txtRowCount.Text) == 0)
+            {
+                txtRowCount.Text = "1";
+            }
+
+            int currentRowCount = rowColors.Count;
+            int newRowCount = int.Parse(txtRowCount.Text);
+
+            if (currentRowCount < newRowCount)
+            {
+                for (int i = currentRowCount; i < newRowCount; i++)
+                {
+                    AddRow();
+                }
+            }
+            else
+            {
+                for (int i = currentRowCount; i > newRowCount; i--)
+                {
+                    DeleteRow();
+                }
+            }
+
+            SetCellSizes();
+        }
+
+        private void btnColCount_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtColCount.Text) || int.Parse(txtColCount.Text) == 0)
+            {
+                txtColCount.Text = "1";
+            }
+
+            int currentColCount = colColors.Count;
+            int newColCount = int.Parse(txtColCount.Text);
+
+            if (currentColCount < newColCount)
+            {
+                for (int i = currentColCount; i < newColCount; i++)
+                {
+                    AddColumn();
+                }
+            }
+            else
+            {
+                for (int i = currentColCount; i > newColCount; i--)
+                {
+                    DeleteColoum();
+                }
+            }
+
+            SetCellSizes();
+        }
 
         #endregion
 
@@ -355,9 +377,8 @@ namespace ColorMixer
             myPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             pnlColor1.BackColor = Color.Transparent;
 
-            lblRows.Text = myPanel.RowCount.ToString();
-            lblCols.Text = myPanel.ColumnCount.ToString();
-
+            txtRowCount.Text = "1";
+            txtColCount.Text = "1";
             pnlRows.RowCount = 1;
             pnlColumns.ColumnCount = 1;
 
@@ -400,14 +421,69 @@ namespace ColorMixer
 
         private void SetCellSizes()
         {
-            lblRows.Text = myPanel.RowCount.ToString();
-            lblCols.Text = myPanel.ColumnCount.ToString();
+            lblRowCell.Text = string.Format("Row Cells [{0}]: {1} inches", rowColors.Count, Math.Round((double)StandardHeight/ (double)rowColors.Count, 2));
+            lblColumnCell.Text = string.Format("Column Cells [{0}]: {1} inches", colColors.Count, Math.Round((double)StandardWidth / (double)colColors.Count, 2));
+        }
 
-            lblRowCell.Text = string.Format("Row Cell: {0} inches", Math.Round((double)StandardHeight/ (double)rowColors.Count, 2));
-            lblColumnCell.Text = string.Format("Column Cell: {0} inches", Math.Round((double)StandardWidth / (double)colColors.Count, 2));
+        private void DeleteRow()
+        {
+            if (myPanel.RowCount > 1)
+            {
+                RowStyle rowStyle = myPanel.RowStyles[myPanel.RowCount - 1];
+
+                rowColors.Remove(rowColors.Count - 1);
+
+                myPanel.RowCount--;
+                pnlRows.RowCount--;
+
+                myPanel.RowStyles.RemoveAt(myPanel.RowCount - 1);
+                pnlRows.RowStyles.RemoveAt(myPanel.RowCount - 1);
+            }
+        }
+
+        private void AddRow()
+        {
+            RowStyle rowStyle = myPanel.RowStyles[myPanel.RowCount - 1];
+
+            rowColors.Add(rowColors.Count, pnlAllRows.BackColor);
+
+            myPanel.RowCount++;
+            pnlRows.RowCount++;
+
+            myPanel.RowStyles.Add(new RowStyle(rowStyle.SizeType, rowStyle.Height));
+            pnlRows.RowStyles.Add(new RowStyle(rowStyle.SizeType, rowStyle.Height));
+        }
+
+        private void DeleteColoum()
+        {
+            if (myPanel.ColumnCount > 1)
+            {
+                ColumnStyle colStyle = myPanel.ColumnStyles[myPanel.ColumnCount - 1];
+
+                colColors.Remove(colColors.Count - 1);
+
+                myPanel.ColumnCount--;
+                pnlColumns.ColumnCount--;
+
+                myPanel.ColumnStyles.RemoveAt(myPanel.ColumnCount - 1);
+                pnlColumns.ColumnStyles.RemoveAt(pnlColumns.ColumnCount - 1);
+            }
+        }
+
+        private void AddColumn()
+        {
+            ColumnStyle colStyle = myPanel.ColumnStyles[myPanel.ColumnCount - 1];
+
+            colColors.Add(colColors.Count, pnlAllCols.BackColor);
+
+            myPanel.ColumnCount++;
+            pnlColumns.ColumnCount++;
+
+            myPanel.ColumnStyles.Add(new ColumnStyle(colStyle.SizeType, colStyle.Width));
+            pnlColumns.ColumnStyles.Add(new ColumnStyle(colStyle.SizeType, colStyle.Width));
         }
 
         #endregion
-        
+
     }
 }

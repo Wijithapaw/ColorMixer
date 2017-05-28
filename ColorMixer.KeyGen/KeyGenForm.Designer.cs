@@ -31,7 +31,7 @@
             this.lblUniqueKey = new System.Windows.Forms.Label();
             this.dtExpiryDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtUniqueIDd = new System.Windows.Forms.TextBox();
+            this.txtUniqueId = new System.Windows.Forms.TextBox();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.txtLicenseKey = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -64,12 +64,12 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Expiry Date";
             // 
-            // txtUniqueIDd
+            // txtUniqueId
             // 
-            this.txtUniqueIDd.Location = new System.Drawing.Point(94, 20);
-            this.txtUniqueIDd.Name = "txtUniqueIDd";
-            this.txtUniqueIDd.Size = new System.Drawing.Size(218, 20);
-            this.txtUniqueIDd.TabIndex = 3;
+            this.txtUniqueId.Location = new System.Drawing.Point(94, 20);
+            this.txtUniqueId.Name = "txtUniqueId";
+            this.txtUniqueId.Size = new System.Drawing.Size(218, 20);
+            this.txtUniqueId.TabIndex = 3;
             // 
             // btnGenerate
             // 
@@ -106,7 +106,7 @@
             this.Controls.Add(this.txtLicenseKey);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnGenerate);
-            this.Controls.Add(this.txtUniqueIDd);
+            this.Controls.Add(this.txtUniqueId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtExpiryDate);
             this.Controls.Add(this.lblUniqueKey);
@@ -123,7 +123,7 @@
         private System.Windows.Forms.Label lblUniqueKey;
         private System.Windows.Forms.DateTimePicker dtExpiryDate;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtUniqueIDd;
+        private System.Windows.Forms.TextBox txtUniqueId;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.TextBox txtLicenseKey;
         private System.Windows.Forms.Label label2;

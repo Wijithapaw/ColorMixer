@@ -22,12 +22,19 @@ namespace ColorMixer.KeyGen
 
         private void formKeyGen_Load(object sender, EventArgs e)
         {
-            //txtUniqueIDd.Text = licenseManager.GetMachineUniqueId().ToString();
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            txtLicenseKey.Text = licenseManager.GenerateKey(licenseManager.GetMachineUniqueId(), dtExpiryDate.Value);
+            int uniqueId = 0;
+            if (int.TryParse(txtUniqueId.Text, out uniqueId))
+            {
+                txtLicenseKey.Text = licenseManager.GenerateKey(uniqueId, dtExpiryDate.Value);
+            }
+            else
+            {
+                MessageBox.Show("Enter unique ID", "Error");
+            }
         }
     }
 }

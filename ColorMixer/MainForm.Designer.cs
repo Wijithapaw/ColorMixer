@@ -28,13 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.myPanel = new System.Windows.Forms.TableLayoutPanel();
             this.btnReset = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSetRows = new System.Windows.Forms.Button();
+            this.txtRowCount = new System.Windows.Forms.TextBox();
             this.btnAddRow = new System.Windows.Forms.Button();
             this.btnDelRow = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnColCount = new System.Windows.Forms.Button();
+            this.txtColCount = new System.Windows.Forms.TextBox();
             this.btnAddCol = new System.Windows.Forms.Button();
             this.btnDelCol = new System.Windows.Forms.Button();
             this.pnlColor1 = new System.Windows.Forms.Panel();
@@ -58,10 +63,6 @@
             this.pnlAllCols = new System.Windows.Forms.TableLayoutPanel();
             this.btnSettings = new System.Windows.Forms.Button();
             this.lblTrial = new System.Windows.Forms.Label();
-            this.txtRowCount = new System.Windows.Forms.TextBox();
-            this.txtColCount = new System.Windows.Forms.TextBox();
-            this.btnSetRows = new System.Windows.Forms.Button();
-            this.btnColCount = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.pnlPrint.SuspendLayout();
@@ -112,6 +113,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rows";
             // 
+            // btnSetRows
+            // 
+            this.btnSetRows.Location = new System.Drawing.Point(61, 17);
+            this.btnSetRows.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSetRows.Name = "btnSetRows";
+            this.btnSetRows.Size = new System.Drawing.Size(48, 20);
+            this.btnSetRows.TabIndex = 27;
+            this.btnSetRows.Text = "Set";
+            this.btnSetRows.UseVisualStyleBackColor = true;
+            this.btnSetRows.Click += new System.EventHandler(this.btnSetRows_Click);
+            // 
+            // txtRowCount
+            // 
+            this.txtRowCount.Location = new System.Drawing.Point(11, 17);
+            this.txtRowCount.Name = "txtRowCount";
+            this.txtRowCount.Size = new System.Drawing.Size(45, 20);
+            this.txtRowCount.TabIndex = 26;
+            this.txtRowCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtRowCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRowCount_KeyPress);
+            // 
             // btnAddRow
             // 
             this.btnAddRow.Location = new System.Drawing.Point(146, 17);
@@ -148,6 +169,26 @@
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Columns";
+            // 
+            // btnColCount
+            // 
+            this.btnColCount.Location = new System.Drawing.Point(63, 17);
+            this.btnColCount.Margin = new System.Windows.Forms.Padding(2);
+            this.btnColCount.Name = "btnColCount";
+            this.btnColCount.Size = new System.Drawing.Size(48, 20);
+            this.btnColCount.TabIndex = 28;
+            this.btnColCount.Text = "Set";
+            this.btnColCount.UseVisualStyleBackColor = true;
+            this.btnColCount.Click += new System.EventHandler(this.btnColCount_Click);
+            // 
+            // txtColCount
+            // 
+            this.txtColCount.Location = new System.Drawing.Point(13, 17);
+            this.txtColCount.Name = "txtColCount";
+            this.txtColCount.Size = new System.Drawing.Size(45, 20);
+            this.txtColCount.TabIndex = 27;
+            this.txtColCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtColCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRowCount_KeyPress);
             // 
             // btnAddCol
             // 
@@ -442,46 +483,6 @@
             this.lblTrial.Text = "Trial Version";
             this.lblTrial.Visible = false;
             // 
-            // txtRowCount
-            // 
-            this.txtRowCount.Location = new System.Drawing.Point(11, 17);
-            this.txtRowCount.Name = "txtRowCount";
-            this.txtRowCount.Size = new System.Drawing.Size(45, 20);
-            this.txtRowCount.TabIndex = 26;
-            this.txtRowCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtRowCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRowCount_KeyPress);
-            // 
-            // txtColCount
-            // 
-            this.txtColCount.Location = new System.Drawing.Point(13, 17);
-            this.txtColCount.Name = "txtColCount";
-            this.txtColCount.Size = new System.Drawing.Size(45, 20);
-            this.txtColCount.TabIndex = 27;
-            this.txtColCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtColCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRowCount_KeyPress);
-            // 
-            // btnSetRows
-            // 
-            this.btnSetRows.Location = new System.Drawing.Point(61, 17);
-            this.btnSetRows.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSetRows.Name = "btnSetRows";
-            this.btnSetRows.Size = new System.Drawing.Size(48, 20);
-            this.btnSetRows.TabIndex = 27;
-            this.btnSetRows.Text = "Set";
-            this.btnSetRows.UseVisualStyleBackColor = true;
-            this.btnSetRows.Click += new System.EventHandler(this.btnSetRows_Click);
-            // 
-            // btnColCount
-            // 
-            this.btnColCount.Location = new System.Drawing.Point(63, 17);
-            this.btnColCount.Margin = new System.Windows.Forms.Padding(2);
-            this.btnColCount.Name = "btnColCount";
-            this.btnColCount.Size = new System.Drawing.Size(48, 20);
-            this.btnColCount.TabIndex = 28;
-            this.btnColCount.Text = "Set";
-            this.btnColCount.UseVisualStyleBackColor = true;
-            this.btnColCount.Click += new System.EventHandler(this.btnColCount_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -501,8 +502,10 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnReset);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "mainForm";
             this.Text = "Handloom Designer";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Resize += new System.EventHandler(this.mainForm_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

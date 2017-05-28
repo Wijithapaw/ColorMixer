@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(settingsForm));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabGeneral = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -51,7 +52,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnAddColor = new System.Windows.Forms.Button();
             this.gvColors = new System.Windows.Forms.DataGridView();
+            this.colColorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.R = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.G = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.B = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tabLicense = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblUniqueId = new System.Windows.Forms.Label();
             this.btnRegister = new System.Windows.Forms.Button();
@@ -59,14 +68,6 @@
             this.txtUniqueId = new System.Windows.Forms.TextBox();
             this.txtKey = new System.Windows.Forms.TextBox();
             this.lblLicenseStatus = new System.Windows.Forms.Label();
-            this.colColorCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.R = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.G = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.B = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabGeneral.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -77,8 +78,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvColors)).BeginInit();
             this.tabLicense.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -322,6 +323,49 @@
             this.gvColors.TabIndex = 0;
             this.gvColors.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvColors_CellClick);
             // 
+            // colColorCode
+            // 
+            this.colColorCode.DataPropertyName = "name";
+            this.colColorCode.HeaderText = "Name";
+            this.colColorCode.Name = "colColorCode";
+            this.colColorCode.ReadOnly = true;
+            // 
+            // R
+            // 
+            this.R.DataPropertyName = "r";
+            this.R.HeaderText = "R";
+            this.R.Name = "R";
+            this.R.ReadOnly = true;
+            // 
+            // G
+            // 
+            this.G.DataPropertyName = "g";
+            this.G.HeaderText = "G";
+            this.G.Name = "G";
+            this.G.ReadOnly = true;
+            // 
+            // B
+            // 
+            this.B.DataPropertyName = "b";
+            this.B.HeaderText = "B";
+            this.B.Name = "B";
+            this.B.ReadOnly = true;
+            // 
+            // Delete
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Blue;
+            this.Delete.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Delete.HeaderText = "Detete";
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Text = "Delete";
+            this.Delete.UseColumnTextForButtonValue = true;
+            this.Delete.Width = 50;
+            // 
             // tabLicense
             // 
             this.tabLicense.BackColor = System.Drawing.SystemColors.Control;
@@ -335,6 +379,35 @@
             this.tabLicense.TabIndex = 1;
             this.tabLicense.Text = "License";
             this.tabLicense.Enter += new System.EventHandler(this.tabLicense_Enter);
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Location = new System.Drawing.Point(37, 380);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(556, 104);
+            this.panel2.TabIndex = 7;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(5, 50);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(341, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Elegance (pvt) Ltd | Tel: +94 77 2941 796 | Email: wijitha@outlook.com";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(433, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "This is a product by Elegance (pvt) Ltd. Using This product without a valid licen" +
+    "se is illegal.";
             // 
             // groupBox1
             // 
@@ -404,78 +477,6 @@
             this.lblLicenseStatus.TabIndex = 3;
             this.lblLicenseStatus.Text = "Key Status";
             // 
-            // colColorCode
-            // 
-            this.colColorCode.DataPropertyName = "name";
-            this.colColorCode.HeaderText = "Name";
-            this.colColorCode.Name = "colColorCode";
-            this.colColorCode.ReadOnly = true;
-            // 
-            // R
-            // 
-            this.R.DataPropertyName = "r";
-            this.R.HeaderText = "R";
-            this.R.Name = "R";
-            this.R.ReadOnly = true;
-            // 
-            // G
-            // 
-            this.G.DataPropertyName = "g";
-            this.G.HeaderText = "G";
-            this.G.Name = "G";
-            this.G.ReadOnly = true;
-            // 
-            // B
-            // 
-            this.B.DataPropertyName = "b";
-            this.B.HeaderText = "B";
-            this.B.Name = "B";
-            this.B.ReadOnly = true;
-            // 
-            // Delete
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Blue;
-            this.Delete.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Delete.HeaderText = "Detete";
-            this.Delete.Name = "Delete";
-            this.Delete.ReadOnly = true;
-            this.Delete.Text = "Delete";
-            this.Delete.UseColumnTextForButtonValue = true;
-            this.Delete.Width = 50;
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Location = new System.Drawing.Point(37, 380);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(556, 104);
-            this.panel2.TabIndex = 7;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(433, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "This is a product by Elegance (pvt) Ltd. Using This product without a valid licen" +
-    "se is illegal.";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(5, 50);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(341, 13);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Elegance (pvt) Ltd | Tel: +94 77 2941 796 | Email: wijitha@outlook.com";
-            // 
             // settingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -483,6 +484,7 @@
             this.ClientSize = new System.Drawing.Size(767, 551);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "settingsForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Settings";
@@ -498,10 +500,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvColors)).EndInit();
             this.tabLicense.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }

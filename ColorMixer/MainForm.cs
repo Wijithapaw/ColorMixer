@@ -49,7 +49,11 @@ namespace ColorMixer
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            Reset();
+            var result = MessageBox.Show("Reseting will wipe out all your current changes in the canves. Do you want to proceed?", "Confirm...", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                Reset();
+            }            
         }
 
         private void btnDelCol_Click(object sender, EventArgs e)

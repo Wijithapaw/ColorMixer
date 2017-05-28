@@ -9,6 +9,8 @@ namespace ColorMixer.Security
 {
     public class LicenseManager
     {
+        #region Properties
+
         public enum LicenseStatus
         {
             Valid,
@@ -21,12 +23,21 @@ namespace ColorMixer.Security
 
         const string numaricChars = "HJKMNPRSTZ";
 
-        const string seperationChars = "VWXYUL"; 
+        const string seperationChars = "VWXYUL";
+
+        #endregion
+
+        #region Constructor
 
         public LicenseManager()
         {
 
         }
+
+        #endregion
+
+
+        #region Public Methods
 
         public int GetMachineUniqueId()
         {
@@ -100,7 +111,11 @@ namespace ColorMixer.Security
             return keyStatus;
         }
 
-        public string GetRawKey(int machineUniqueId, DateTime expiryDate)
+        #endregion
+
+        #region Private Methods
+
+        private string GetRawKey(int machineUniqueId, DateTime expiryDate)
         {
             string expiryDateStr = expiryDate.ToString("yyyy|MM|dd");
 
@@ -144,7 +159,7 @@ namespace ColorMixer.Security
             return finalKey;
         }
 
-        public string Decrypt(string key)
+        private string Decrypt(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ApplicationException("Key is empty");
@@ -202,6 +217,8 @@ namespace ColorMixer.Security
             key.Insert(8, "-");
             key.Insert(4, "-");
         }
+
+        #endregion
 
     }
 }

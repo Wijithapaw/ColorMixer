@@ -196,8 +196,11 @@ namespace ColorMixer
 
         private void mainForm_Resize(object sender, EventArgs e)
         {
-            pnlRows.Height = myPanel.Height = (myPanel.Width * StandardHeight) / StandardWidth;
-            pnlPrint.Height = myPanel.Height + 180;      
+            if (myPanel.Width > 0)
+            {
+                pnlRows.Height = myPanel.Height = (myPanel.Width * StandardHeight) / StandardWidth;
+                pnlPrint.Height = myPanel.Height + 180;
+            }
         }
 
         private void pnlAllCols_Click(object sender, EventArgs e)
